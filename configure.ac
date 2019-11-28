@@ -539,6 +539,10 @@ if test x"$with_fbdev" != xno ; then
 	AC_DEFINE_UNQUOTED(FB_DEV, "$withval", [Defines which device to use for main framebuffer (e.g. /dev/fb0)])
 fi
 
+if test "$BOXTYPE" == "spark" -o "$BOXTYPE" == "spark7162"; then
+	AC_DEFINE(FORCE_ADVANCED_REMOTE, 1,[define to fixup the input device identification when the remote control is actually an 'advanced' remote (with play/forward/rewind keys)])
+fi
+
 AC_ARG_WITH(lcddev,
 	AC_HELP_STRING([--with-lcddev=devicename], [use devicename for lcd framebuffer device, e.g. /dev/fb1 ]),
 	[[with_lcddev=$withval]],
@@ -567,6 +571,7 @@ data/Makefile
 data/fonts/Makefile
 data/keymaps/Makefile
 data/displaytext/Makefile
+data/displaydualtext/Makefile
 data/7segment/Makefile
 data/display96/Makefile
 data/display128/Makefile
