@@ -556,7 +556,7 @@ class InfoBarShowHide(InfoBarScreenSaver):
 		self["ShowHideActions"] = ActionMap( ["InfobarShowHideActions"] ,
 			{
 				"LongOKPressed": self.toggleShowLong,
-				"toggleShow": self.toggleShow,
+				"toggleShow": self.okButtonCheck,
 				"hide": self.keyHide,
 			}, 1) # lower prio to make it possible to override ok and cancel..
 
@@ -745,6 +745,12 @@ class InfoBarShowHide(InfoBarScreenSaver):
 #					self.pvrStateDialog.hide()
 #				except:
 #					pass
+
+	def okButtonCheck(self):
+		if config.usage.ok_is_channelselection.value and hasattr(self, "openServiceList"):
+			self.openServiceList()
+		else:
+			self.toggleShow()
 
 	def toggleShow(self):
 		if not hasattr(self, "LongButtonPressed"):
